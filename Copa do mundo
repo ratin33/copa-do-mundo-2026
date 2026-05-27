@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Copa do Mundo 2026 - Super Site Interativo</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:#0b1020;
+      color:white;
+    }
+
+    header{
+      background:linear-gradient(90deg,#0f172a,#1e3a8a,#2563eb);
+      padding:30px;
+      text-align:center;
+      box-shadow:0 0 20px rgba(0,0,0,0.5);
+    }
+
+    header h1{
+      font-size:42px;
+      margin-bottom:10px;
+    }
+
+    header p{
+      color:#dbeafe;
+    }
+
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      background:#111827;
+      padding:15px;
+      flex-wrap:wrap;
+    }
+
+    nav button{
+      padding:12px 18px;
+      border:none;
+      border-radius:10px;
+      background:#2563eb;
+      color:white;
+      cursor:pointer;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    nav button:hover{
+      background:#3b82f6;
+      transform:scale(1.05);
+    }
+
+    section{
+      display:none;
+      padding:30px;
+      animation:fade 0.4s;
+    }
+
+    section.active{
+      display:block;
+    }
+
+    @keyframes fade{
+      from{opacity:0;}
+      to{opacity:1;}
+    }
+
+    .grupo-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      margin-top:20px;
+    }
+
+    .grupo{
+      background:#111827;
+      padding:20px;
+      border-radius:15px;
+      border:2px solid #2563eb;
+    }
+
+    .grupo h3{
+      margin-bottom:15px;
+      color:#60a5fa;
+    }
+
+    .grupo ul{
+      list-style:none;
+    }
+
+    .grupo li{
+      margin-bottom:8px;
+      padding:8px;
+      background:#1f2937;
+      border-radius:8px;
+    }
+
+    .cards-times{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      margin-top:20px;
+    }
+
+    .card{
+      background:#111827;
+      padding:20px;
+      border-radius:15px;
+      border:2px solid #1d4ed8;
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 0 15px rgba(37,99,235,0.5);
+    }
+
+    .card h2{
+      color:#60a5fa;
+      margin-bottom:15px;
+    }
+
+    .card p{
+      margin-bottom:10px;
+    }
+
+    .convocados{
+      max-height:250px;
+      overflow:auto;
+      background:#1f2937;
+      padding:10px;
+      border-radius:10px;
+    }
+
+    .convocados li{
+      margin-bottom:6px;
+    }
+
+    .campo{
+      width:100%;
+      max-width:900px;
+      height:600px;
+      margin:auto;
+      background:green;
+      border:5px solid white;
+      border-radius:20px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .linha-meio{
+      position:absolute;
+      width:5px;
+      height:100%;
+      background:white;
+      left:50%;
+      transform:translateX(-50%);
+    }
+
+    .circulo{
+      width:150px;
+      height:150px;
+      border:5px solid white;
+      border-radius:50%;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+    }
+
+    .jogador{
+      position:absolute;
+      background:#2563eb;
+      padding:8px;
+      border-radius:50%;
+      width:80px;
+      height:80px;
+      text-align:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:bold;
+      cursor:grab;
+      user-select:none;
+    }
+
+    footer{
+      background:#111827;
+      padding:20px;
+      text-align:center;
+      margin-top:40px;
+      color:#9ca3af;
+    }
+
+    .info{
+      margin-top:20px;
+      background:#111827;
+      padding:20px;
+      border-radius:15px;
+      line-height:1.8;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🏆 Copa do Mundo FIFA 2026</h1>
+  <p>48 Seleções • Escalações • Convocados • Monte sua própria seleção</p>
+</header>
+
+<nav>
+  <button onclick="mostrar('inicio')">Início</button>
+  <button onclick="mostrar('grupos')">Grupos</button>
+  <button onclick="mostrar('selecoes')">Seleções</button>
+  <button onclick="mostrar('escalacao')">Monte sua Seleção</button>
+</nav>
+
+<!-- INICIO -->
+<section id="inicio" class="active">
+  <h1>🌎 Copa do Mundo 2026</h1>
+
+  <div class="info">
+    <p>
+      A Copa do Mundo de 2026 será a primeira com 48 seleções,
+      divididas em 12 grupos. O torneio será sediado nos Estados Unidos,
+      Canadá e México.
+    </p>
+
+    <p>
+      O novo formato terá 104 jogos e uma fase mata-mata com 32 equipes.
+    </p>
+
+    <p>
+      Neste site você poderá:
+    </p>
+
+    <ul>
+      <li>✅ Ver os grupos da Copa</li>
+      <li>✅ Explorar seleções</li>
+      <li>✅ Ver jogadores convocados</li>
+      <li>✅ Criar sua própria escalação</li>
+      <li>✅ Montar seu time dos sonhos</li>
+    </ul>
+  </div>
+</section>
+
+<!-- GRUPOS -->
+<section id="grupos">
+  <h1>⚽ Grupos da Copa</h1>
+
+  <div class="grupo-grid">
+
+    <div class="grupo">
+      <h3>Grupo A</h3>
+      <ul>
+        <li>Brasil</li>
+        <li>Canadá</li>
+        <li>Japão</li>
+        <li>Nigéria</li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Grupo B</h3>
+      <ul>
+        <li>Argentina</li>
+        <li>México</li>
+        <li>Egito</li>
+        <li>Suécia</li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Grupo C</h3>
+      <ul>
+        <li>França</li>
+        <li>Estados Unidos</li>
+        <li>Coreia do Sul</li>
+        <li>Marrocos</li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Grupo D</h3>
+      <ul>
+        <li>Espanha</li>
+        <li>Alemanha</li>
+        <li>Uruguai</li>
+        <li>Austrália</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SELECOES -->
+<section id="selecoes">
+  <h1>🌍 Seleções</h1>
+
+  <div class="cards-times">
+
+    <div class="card">
+      <h2>🇧🇷 Brasil</h2>
+
+      <p><strong>Técnico:</strong> Carlo Ancelotti</p>
+
+      <h3>Convocados</h3>
+
+      <ul class="convocados">
+        <li>Alisson</li>
+        <li>Ederson</li>
+        <li>Marquinhos</li>
+        <li>Militão</li>
+        <li>Danilo</li>
+        <li>Casemiro</li>
+        <li>Bruno Guimarães</li>
+        <li>Paquetá</li>
+        <li>Vinícius Jr</li>
+        <li>Rodrygo</li>
+        <li>Neymar</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🇦🇷 Argentina</h2>
+
+      <p><strong>Técnico:</strong> Lionel Scaloni</p>
+
+      <h3>Convocados</h3>
+
+      <ul class="convocados">
+        <li>Emiliano Martínez</li>
+        <li>Otamendi</li>
+        <li>Romero</li>
+        <li>Enzo Fernández</li>
+        <li>Mac Allister</li>
+        <li>De Paul</li>
+        <li>Messi</li>
+        <li>Julián Álvarez</li>
+        <li>Lautaro Martínez</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🇫🇷 França</h2>
+
+      <p><strong>Técnico:</strong> Didier Deschamps</p>
+
+      <h3>Convocados</h3>
+
+      <ul class="convocados">
+        <li>Maignan</li>
+        <li>Saliba</li>
+        <li>Konaté</li>
+        <li>Camavinga</li>
+        <li>Tchouaméni</li>
+        <li>Griezmann</li>
+        <li>Dembélé</li>
+        <li>Mbappé</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🇵🇹 Portugal</h2>
+
+      <p><strong>Técnico:</strong> Roberto Martínez</p>
+
+      <h3>Convocados</h3>
+
+      <ul class="convocados">
+        <li>Diogo Costa</li>
+        <li>Pepe</li>
+        <li>Rúben Dias</li>
+        <li>João Cancelo</li>
+        <li>Vitinha</li>
+        <li>Bernardo Silva</li>
+        <li>Bruno Fernandes</li>
+        <li>Rafael Leão</li>
+        <li>Cristiano Ronaldo</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ESCALACAO -->
+<section id="escalacao">
+  <h1>🔥 Monte sua Seleção</h1>
+
+  <p style="margin:20px 0;">
+    Arraste os jogadores pelo campo e crie sua formação.
+  </p>
+
+  <div class="campo">
+
+    <div class="linha-meio"></div>
+    <div class="circulo"></div>
+
+    <div class="jogador" style="top:500px; left:400px;">Alisson</div>
+
+    <div class="jogador" style="top:400px; left:100px;">Danilo</div>
+
+    <div class="jogador" style="top:380px; left:300px;">Marquinhos</div>
+
+    <div class="jogador" style="top:380px; left:500px;">Militão</div>
+
+    <div class="jogador" style="top:400px; left:700px;">Theo</div>
+
+    <div class="jogador" style="top:250px; left:220px;">Casemiro</div>
+
+    <div class="jogador" style="top:250px; left:550px;">Bellingham</div>
+
+    <div class="jogador" style="top:130px; left:120px;">Vini Jr</div>
+
+    <div class="jogador" style="top:100px; left:390px;">Messi</div>
+
+    <div class="jogador" style="top:130px; left:650px;">Mbappé</div>
+
+    <div class="jogador" style="top:40px; left:390px;">Haaland</div>
+
+  </div>
+
+</section>
+
+<footer>
+  Site interativo da Copa do Mundo 2026 ⚽
+</footer>
+
+<script>
+
+function mostrar(secao){
+
+  document.querySelectorAll("section").forEach(s=>{
+    s.classList.remove("active");
+  });
+
+  document.getElementById(secao).classList.add("active");
+}
+
+
+// DRAG DOS JOGADORES
+const jogadores = document.querySelectorAll(".jogador");
+
+jogadores.forEach(jogador=>{
+
+  jogador.addEventListener("mousedown", ()=>{
+
+    jogador.style.cursor="grabbing";
+
+    function mover(e){
+
+      jogador.style.left = e.pageX - 40 + "px";
+      jogador.style.top = e.pageY - 120 + "px";
+    }
+
+    document.addEventListener("mousemove", mover);
+
+    document.addEventListener("mouseup", ()=>{
+      document.removeEventListener("mousemove", mover);
+      jogador.style.cursor="grab";
+    });
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
