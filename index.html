@@ -381,88 +381,93 @@
 
   </div>
 </section>
-<!-- ESCALACAO -->
 <section id="escalacao">
-  <h1>🔥 Monte sua Seleção</h1>
+  <h1>🔥 Monte sua Seleção - Formação 4-3-3</h1>
 
-  <p style="margin:20px 0;">
-    Arraste os jogadores pelo campo e crie sua formação.
-  </p>
+  <div style="margin:20px 0;">
+    <input type="text" id="nomeJogador" placeholder="Nome do jogador"
+      style="padding:10px;border-radius:8px;border:none;width:250px;">
 
-  <div class="campo">
+    <button onclick="adicionarJogador()"
+      style="padding:10px 20px;
+      border:none;
+      background:#2563eb;
+      color:white;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:bold;">
+      Adicionar Jogador
+    </button>
+  </div>
+
+  <div class="campo" id="campo">
 
     <div class="linha-meio"></div>
     <div class="circulo"></div>
 
-    <div class="jogador" style="top:500px; left:400px;">Alisson</div>
+    <!-- GOLEIRO -->
+    <div class="jogador" style="top:500px; left:390px;">GK</div>
 
-    <div class="jogador" style="top:400px; left:100px;">Danilo</div>
+    <!-- DEFESA -->
+    <div class="jogador" style="top:400px; left:120px;">LB</div>
 
-    <div class="jogador" style="top:380px; left:300px;">Marquinhos</div>
+    <div class="jogador" style="top:420px; left:300px;">CB</div>
 
-    <div class="jogador" style="top:380px; left:500px;">Militão</div>
+    <div class="jogador" style="top:420px; left:500px;">CB</div>
 
-    <div class="jogador" style="top:400px; left:700px;">Theo</div>
+    <div class="jogador" style="top:400px; left:680px;">RB</div>
 
-    <div class="jogador" style="top:250px; left:220px;">Casemiro</div>
+    <!-- MEIO -->
+    <div class="jogador" style="top:260px; left:180px;">CM</div>
 
-    <div class="jogador" style="top:250px; left:550px;">Bellingham</div>
+    <div class="jogador" style="top:230px; left:390px;">CAM</div>
 
-    <div class="jogador" style="top:130px; left:120px;">Vini Jr</div>
+    <div class="jogador" style="top:260px; left:600px;">CM</div>
 
-    <div class="jogador" style="top:100px; left:390px;">Messi</div>
+    <!-- ATAQUE -->
+    <div class="jogador" style="top:80px; left:120px;">LW</div>
 
-    <div class="jogador" style="top:130px; left:650px;">Mbappé</div>
+    <div class="jogador" style="top:40px; left:390px;">ST</div>
 
-    <div class="jogador" style="top:40px; left:390px;">Haaland</div>
+    <div class="jogador" style="top:80px; left:680px;">RW</div>
 
   </div>
-
 </section>
-
-<footer>
-  Site interativo da Copa do Mundo 2026 ⚽
-</footer>
-
 <script>
 
-function mostrar(secao){
+function adicionarJogador(){
 
-  document.querySelectorAll("section").forEach(s=>{
-    s.classList.remove("active");
-  });
+  let nome = document.getElementById("nomeJogador").value;
 
-  document.getElementById(secao).classList.add("active");
+  if(nome == ""){
+    alert("Digite o nome do jogador!");
+    return;
+  }
+
+  let posicoes = document.querySelectorAll(".jogador");
+
+  for(let i = 0; i < posicoes.length; i++){
+
+    let texto = posicoes[i].innerText;
+
+    if(
+      texto == "GK" ||
+      texto == "LB" ||
+      texto == "CB" ||
+      texto == "RB" ||
+      texto == "CM" ||
+      texto == "CAM" ||
+      texto == "LW" ||
+      texto == "ST" ||
+      texto == "RW"
+    ){
+      posicoes[i].innerText = nome;
+      break;
+    }
+  }
+
+  document.getElementById("nomeJogador").value = "";
 }
 
-
-// DRAG DOS JOGADORES
-const jogadores = document.querySelectorAll(".jogador");
-
-jogadores.forEach(jogador=>{
-
-  jogador.addEventListener("mousedown", ()=>{
-
-    jogador.style.cursor="grabbing";
-
-    function mover(e){
-
-      jogador.style.left = e.pageX - 40 + "px";
-      jogador.style.top = e.pageY - 120 + "px";
-    }
-
-    document.addEventListener("mousemove", mover);
-
-    document.addEventListener("mouseup", ()=>{
-      document.removeEventListener("mousemove", mover);
-      jogador.style.cursor="grab";
-    });
-
-  });
-
-});
-
 </script>
-
-</body>
 </html>
