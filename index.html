@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Copa do Mundo 2026 - Super Site Interativo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copa do Mundo Interativa</title>
 
   <style>
     *{
@@ -14,460 +14,272 @@
     }
 
     body{
-      background:#0b1020;
+      background: linear-gradient(135deg,#0b6623,#1e90ff);
       color:white;
+      overflow-x:hidden;
     }
 
     header{
-      background:linear-gradient(90deg,#0f172a,#1e3a8a,#2563eb);
-      padding:30px;
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
       text-align:center;
-      box-shadow:0 0 20px rgba(0,0,0,0.5);
+      padding:20px;
     }
 
     header h1{
-      font-size:42px;
-      margin-bottom:10px;
+      font-size:4rem;
+      margin-bottom:20px;
+      animation: brilho 2s infinite alternate;
+    }
+
+    @keyframes brilho{
+      from{
+        text-shadow:0 0 10px #fff;
+      }
+      to{
+        text-shadow:0 0 30px yellow;
+      }
     }
 
     header p{
-      color:#dbeafe;
+      font-size:1.3rem;
+      max-width:700px;
     }
 
-    nav{
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      background:#111827;
-      padding:15px;
-      flex-wrap:wrap;
-    }
-
-    nav button{
-      padding:12px 18px;
+    .btn{
+      margin-top:30px;
+      padding:15px 30px;
+      background:gold;
+      color:black;
       border:none;
       border-radius:10px;
-      background:#2563eb;
-      color:white;
+      font-size:1.1rem;
       cursor:pointer;
-      font-weight:bold;
       transition:0.3s;
     }
 
-    nav button:hover{
-      background:#3b82f6;
-      transform:scale(1.05);
+    .btn:hover{
+      transform:scale(1.1);
+      background:white;
     }
 
     section{
-      display:none;
-      padding:30px;
-      animation:fade 0.4s;
+      padding:60px 20px;
     }
 
-    section.active{
-      display:block;
-    }
-
-    @keyframes fade{
-      from{opacity:0;}
-      to{opacity:1;}
-    }
-
-    .grupo-grid{
+    .cards{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
       gap:20px;
-      margin-top:20px;
-    }
-
-    .grupo{
-      background:#111827;
-      padding:20px;
-      border-radius:15px;
-      border:2px solid #2563eb;
-    }
-
-    .grupo h3{
-      margin-bottom:15px;
-      color:#60a5fa;
-    }
-
-    .grupo ul{
-      list-style:none;
-    }
-
-    .grupo li{
-      margin-bottom:8px;
-      padding:8px;
-      background:#1f2937;
-      border-radius:8px;
-    }
-
-    .cards-times{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:20px;
-      margin-top:20px;
+      margin-top:30px;
     }
 
     .card{
-      background:#111827;
-      padding:20px;
-      border-radius:15px;
-      border:2px solid #1d4ed8;
-      transition:0.3s;
+      background:rgba(255,255,255,0.15);
+      padding:25px;
+      border-radius:20px;
+      backdrop-filter:blur(8px);
+      transition:0.4s;
+      text-align:center;
     }
 
     .card:hover{
-      transform:translateY(-5px);
-      box-shadow:0 0 15px rgba(37,99,235,0.5);
+      transform:translateY(-10px) scale(1.03);
+      background:rgba(255,255,255,0.25);
     }
 
-    .card h2{
-      color:#60a5fa;
+    .card h3{
       margin-bottom:15px;
+      font-size:1.5rem;
+      color:yellow;
     }
 
-    .card p{
-      margin-bottom:10px;
-    }
-
-    .convocados{
-      max-height:250px;
-      overflow:auto;
-      background:#1f2937;
-      padding:10px;
-      border-radius:10px;
-    }
-
-    .convocados li{
-      margin-bottom:6px;
-    }
-
-    .campo{
-      width:100%;
-      max-width:900px;
-      height:600px;
-      margin:auto;
-      background:green;
-      border:5px solid white;
-      border-radius:20px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .linha-meio{
-      position:absolute;
-      width:5px;
-      height:100%;
-      background:white;
-      left:50%;
-      transform:translateX(-50%);
-    }
-
-    .circulo{
-      width:150px;
-      height:150px;
-      border:5px solid white;
-      border-radius:50%;
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-    }
-
-    .jogador{
-      position:absolute;
-      background:#2563eb;
-      padding:8px;
-      border-radius:50%;
-      width:80px;
-      height:80px;
-      text-align:center;
+    .times{
       display:flex;
-      align-items:center;
+      flex-wrap:wrap;
       justify-content:center;
-      font-size:12px;
-      font-weight:bold;
-      cursor:grab;
-      user-select:none;
+      gap:20px;
+      margin-top:30px;
+    }
+
+    .time{
+      background:white;
+      color:black;
+      width:150px;
+      padding:20px;
+      border-radius:15px;
+      text-align:center;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .time:hover{
+      transform:scale(1.1);
+      background:gold;
     }
 
     footer{
-      background:#111827;
-      padding:20px;
       text-align:center;
+      padding:20px;
+      background:rgba(0,0,0,0.4);
       margin-top:40px;
-      color:#9ca3af;
     }
 
-    .info{
+    #placar{
+      margin-top:40px;
+      text-align:center;
+    }
+
+    input{
+      padding:10px;
+      border:none;
+      border-radius:10px;
+      margin:10px;
+      width:80px;
+      text-align:center;
+      font-size:1.2rem;
+    }
+
+    .resultado{
       margin-top:20px;
-      background:#111827;
-      padding:20px;
-      border-radius:15px;
-      line-height:1.8;
+      font-size:1.5rem;
+      color:yellow;
     }
 
   </style>
 </head>
-
 <body>
 
-<header>
-  <h1>🏆 Copa do Mundo FIFA 2026</h1>
-  <p>48 Seleções • Escalações • Convocados • Monte sua própria seleção</p>
-</header>
-
-<nav>
-  <button onclick="mostrar('inicio')">Início</button>
-  <button onclick="mostrar('grupos')">Grupos</button>
-  <button onclick="mostrar('escalacao')">Monte sua Seleção</button>
-</nav>
-
-<!-- INICIO -->
-<section id="inicio" class="active">
-  <h1>🌎 Copa do Mundo 2026</h1>
-
-  <div class="info">
+  <header>
+    <h1>⚽ Copa do Mundo ⚽</h1>
     <p>
-      A Copa do Mundo de 2026 será a primeira com 48 seleções,
-      divididas em 12 grupos. O torneio será sediado nos Estados Unidos,
-      Canadá e México.
+      Explore curiosidades, seleções históricas e teste seus palpites
+      em um site totalmente interativo sobre a Copa do Mundo!
     </p>
 
-    <p>
-      O novo formato terá 104 jogos e uma fase mata-mata com 32 equipes.
-    </p>
-
-    <p>
-      Neste site você poderá:
-    </p>
-
-    <ul>
-      <li>✅ Ver os grupos da Copa</li>
-      <li>✅ Explorar seleções</li>
-      <li>✅ Ver jogadores convocados</li>
-      <li>✅ Criar sua própria escalação</li>
-      <li>✅ Montar seu time dos sonhos</li>
-    </ul>
-  </div>
-</section>
-<section id="grupos">
-  <h1>⚽ Grupos da Copa</h1>
-
-  <div class="grupo-grid">
-
-    <div class="grupo">
-      <h3>Grupo A</h3>
-      <ul>
-        <li>Brasil</li>
-        <li>Canadá</li>
-        <li>Japão</li>
-        <li>Nigéria</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo B</h3>
-      <ul>
-        <li>Argentina</li>
-        <li>México</li>
-        <li>Egito</li>
-        <li>Suécia</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo C</h3>
-      <ul>
-        <li>França</li>
-        <li>Estados Unidos</li>
-        <li>Coreia do Sul</li>
-        <li>Marrocos</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo D</h3>
-      <ul>
-        <li>Espanha</li>
-        <li>Alemanha</li>
-        <li>Uruguai</li>
-        <li>Austrália</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo E</h3>
-      <ul>
-        <li>Portugal</li>
-        <li>Croácia</li>
-        <li>Senegal</li>
-        <li>Irã</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo F</h3>
-      <ul>
-        <li>Inglaterra</li>
-        <li>Dinamarca</li>
-        <li>Equador</li>
-        <li>Camarões</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo G</h3>
-      <ul>
-        <li>Holanda</li>
-        <li>Suíça</li>
-        <li>Costa Rica</li>
-        <li>Argélia</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo H</h3>
-      <ul>
-        <li>Bélgica</li>
-        <li>Sérvia</li>
-        <li>Gana</li>
-        <li>Arábia Saudita</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo I</h3>
-      <ul>
-        <li>Itália</li>
-        <li>Turquia</li>
-        <li>Peru</li>
-        <li>Tunísia</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo J</h3>
-      <ul>
-        <li>Colômbia</li>
-        <li>Chile</li>
-        <li>Noruega</li>
-        <li>Nova Zelândia</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo K</h3>
-      <ul>
-        <li>Paraguai</li>
-        <li>Áustria</li>
-        <li>Ucrânia</li>
-        <li>Mali</li>
-      </ul>
-    </div>
-
-    <div class="grupo">
-      <h3>Grupo L</h3>
-      <ul>
-        <li>Polônia</li>
-        <li>República Tcheca</li>
-        <li>Grécia</li>
-        <li>China</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-<section id="escalacao">
-  <h1>🔥 Monte sua Seleção - Formação 4-3-3</h1>
-
-  <div style="margin:20px 0;">
-    <input type="text" id="nomeJogador" placeholder="Nome do jogador"
-      style="padding:10px;border-radius:8px;border:none;width:250px;">
-
-    <button onclick="adicionarJogador()"
-      style="padding:10px 20px;
-      border:none;
-      background:#2563eb;
-      color:white;
-      border-radius:8px;
-      cursor:pointer;
-      font-weight:bold;">
-      Adicionar Jogador
+    <button class="btn" onclick="mostrarMensagem()">
+      Clique para começar
     </button>
-  </div>
+  </header>
 
-  <div class="campo" id="campo">
+  <section>
+    <h2 style="text-align:center; font-size:2.5rem;">
+      🌍 Curiosidades da Copa
+    </h2>
 
-    <div class="linha-meio"></div>
-    <div class="circulo"></div>
+    <div class="cards">
 
-    <!-- GOLEIRO -->
-    <div class="jogador" style="top:500px; left:390px;">GK</div>
+      <div class="card">
+        <h3>🏆 Maior Campeão</h3>
+        <p>O Brasil é o maior campeão da Copa do Mundo com 5 títulos.</p>
+      </div>
 
-    <!-- DEFESA -->
-    <div class="jogador" style="top:400px; left:120px;">LB</div>
+      <div class="card">
+        <h3>⚽ Artilheiro</h3>
+        <p>Miroslav Klose é o maior artilheiro da história das Copas.</p>
+      </div>
 
-    <div class="jogador" style="top:420px; left:300px;">CB</div>
+      <div class="card">
+        <h3>🌎 Primeiro Campeão</h3>
+        <p>O Uruguai venceu a primeira Copa do Mundo em 1930.</p>
+      </div>
 
-    <div class="jogador" style="top:420px; left:500px;">CB</div>
+    </div>
+  </section>
 
-    <div class="jogador" style="top:400px; left:680px;">RB</div>
+  <section>
+    <h2 style="text-align:center; font-size:2.5rem;">
+      ⭐ Seleções Famosas
+    </h2>
 
-    <!-- MEIO -->
-    <div class="jogador" style="top:260px; left:180px;">CM</div>
+    <div class="times">
 
-    <div class="jogador" style="top:230px; left:390px;">CAM</div>
+      <div class="time" onclick="timeSelecionado('Brasil 🇧🇷')">
+        Brasil 🇧🇷
+      </div>
 
-    <div class="jogador" style="top:260px; left:600px;">CM</div>
+      <div class="time" onclick="timeSelecionado('Argentina 🇦🇷')">
+        Argentina 🇦🇷
+      </div>
 
-    <!-- ATAQUE -->
-    <div class="jogador" style="top:80px; left:120px;">LW</div>
+      <div class="time" onclick="timeSelecionado('França 🇫🇷')">
+        França 🇫🇷
+      </div>
 
-    <div class="jogador" style="top:40px; left:390px;">ST</div>
+      <div class="time" onclick="timeSelecionado('Alemanha 🇩🇪')">
+        Alemanha 🇩🇪
+      </div>
 
-    <div class="jogador" style="top:80px; left:680px;">RW</div>
+    </div>
+  </section>
 
-  </div>
-</section>
-<script>
+  <section id="placar">
+    <h2 style="font-size:2.5rem;">
+      🥅 Simulador de Placar
+    </h2>
 
-function adicionarJogador(){
+    <div style="margin-top:20px;">
 
-  let nome = document.getElementById("nomeJogador").value;
+      <span style="font-size:1.5rem;">Brasil 🇧🇷</span>
+      <input type="number" id="gols1" min="0">
 
-  if(nome == ""){
-    alert("Digite o nome do jogador!");
-    return;
-  }
+      <span style="font-size:1.5rem;">X</span>
 
-  let posicoes = document.querySelectorAll(".jogador");
+      <input type="number" id="gols2" min="0">
+      <span style="font-size:1.5rem;">Argentina 🇦🇷</span>
 
-  for(let i = 0; i < posicoes.length; i++){
+    </div>
 
-    let texto = posicoes[i].innerText;
+    <button class="btn" onclick="simularJogo()">
+      Simular Resultado
+    </button>
 
-    if(
-      texto == "GK" ||
-      texto == "LB" ||
-      texto == "CB" ||
-      texto == "RB" ||
-      texto == "CM" ||
-      texto == "CAM" ||
-      texto == "LW" ||
-      texto == "ST" ||
-      texto == "RW"
-    ){
-      posicoes[i].innerText = nome;
-      break;
+    <div class="resultado" id="resultado"></div>
+
+  </section>
+
+  <footer>
+    <p>⚽ Site Interativo da Copa do Mundo | Criado em HTML, CSS e JavaScript</p>
+  </footer>
+
+  <script>
+
+    function mostrarMensagem(){
+      alert("Bem-vindo ao mundo do futebol! ⚽🔥");
     }
-  }
 
-  document.getElementById("nomeJogador").value = "";
-}
+    function timeSelecionado(time){
+      alert("Você selecionou: " + time);
+    }
 
-</script>
+    function simularJogo(){
+
+      let gols1 = parseInt(document.getElementById("gols1").value);
+      let gols2 = parseInt(document.getElementById("gols2").value);
+
+      let resultado = document.getElementById("resultado");
+
+      if(isNaN(gols1) || isNaN(gols2)){
+        resultado.innerHTML = "Digite os gols corretamente!";
+        return;
+      }
+
+      if(gols1 > gols2){
+        resultado.innerHTML = "🏆 Brasil venceu!";
+      }
+      else if(gols2 > gols1){
+        resultado.innerHTML = "🏆 Argentina venceu!";
+      }
+      else{
+        resultado.innerHTML = "🤝 Empate emocionante!";
+      }
+
+    }
+
+  </script>
+
+</body>
 </html>
